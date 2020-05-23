@@ -5,6 +5,10 @@ const io = require("socket.io")(http);
 
 app.use(express.static("public"));
 
+app.get("/room/:room", (req, res) => {
+  res.sendFile(process.cwd() + "/public/index.html");
+});
+
 const socket = require("./socket");
 io.on("connection", socket);
 
@@ -19,6 +23,6 @@ app.get("/code/:shortCode", async (req, res) => {
   res.json(state);
 });
 
-http.listen(process.env.PORT || 4000, () => {
+http.listen(4000, () => {
   console.log("server starting...");
 });
